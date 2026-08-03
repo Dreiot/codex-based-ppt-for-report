@@ -1,6 +1,6 @@
 ---
 name: codex-based-ppt-for-report
-description: Create evidence-grounded, editable Chinese research group meeting presentations from user-selected Codex project conversations and explicitly referenced local project artifacts. Use for biweekly research updates, method and experiment plans, reviewer-response presentations, milestone summaries, multi-project group meetings, or revisions to an existing group-meeting deck when Codex must select tasks by project and time range, confirm the factual basis before production, distinguish verified progress from plans, explain workflow or formula changes before versus after, obtain outline approval, disclose and use an appropriate presentation-production path, and deliver only the requested PPTX by default or an explicitly requested offline HTML.
+description: Create evidence-grounded, editable Chinese research group meeting presentations from user-selected Codex project conversations, available canonical project authorities, and relevant local artifacts. Use for biweekly research updates, method and experiment plans, reviewer-response presentations, milestone summaries, multi-project group meetings, or revisions to an existing group-meeting deck when Codex must select tasks by project and time range, confirm the factual basis before production, distinguish verified progress from plans, explain workflow or formula changes before versus after, obtain outline approval, disclose and use an appropriate presentation-production path, and deliver only the requested PPTX by default or an explicitly requested offline HTML. Prefer AGENTS.md, docs/PROJECT_CORE.md, and docs/CURRENT_STAGE.md when present, but remain fully usable for projects that do not follow that framework.
 ---
 
 # Codex-Based PPT for Report
@@ -9,7 +9,9 @@ Create a defensible presentation from selected Codex task history. Keep content 
 
 ## Non-negotiable boundaries
 
-- Use only user-approved Codex tasks and local artifacts explicitly referenced by those tasks.
+- Use only user-approved projects and Codex tasks. Within a selected project,
+  prefer available canonical repository authorities and task-referenced local
+  artifacts; never require the project to use a particular handoff framework.
 - Do not browse for supplementary claims or introduce external evidence without explicit permission.
 - Never silently broaden the project, task, or date scope.
 - Never overwrite an existing deck unless the user explicitly requests it.
@@ -35,6 +37,25 @@ Ask one compact set of startup questions covering only decisions that cannot be 
 4. State the expected speaking duration.
 5. Confirm a report type and output directory when they cannot be safely inferred from context. Use editable `.pptx` by default; accept offline editable `.html` when explicitly requested. Unless the user specifies another convention, name the final file `<YYYY-MM-DD>_<汇报类型>.pptx` or `.html`.
 
+Identify each selected project's repository only from user-provided paths,
+established workspace mappings, task metadata, or approved task references.
+When the repository is already known, read the preferred files before task
+bodies. If an approved task first reveals the repository, read the files as
+soon as it does and before synthesizing the project narrative. Prefer these
+files when they exist:
+
+- `AGENTS.md` for stable operating, data, validation, and claim boundaries;
+- `docs/PROJECT_CORE.md` for durable research direction, innovations,
+  components, explored directions, evidence position, and scientific limits;
+- `docs/CURRENT_STAGE.md` for the current milestone, formal review state,
+  material blockers, and next action.
+
+These files are preferred context, not prerequisites. If they are absent,
+partially present, inaccessible, or clearly not used by the project, continue
+with the conversation-evidence workflow. Do not create, migrate, or edit them
+as a side effect of making a presentation, and do not scan unrelated
+repositories to find them.
+
 List candidate Codex tasks within the selected projects and dates. Let the user confirm which tasks to include before reading their full content. For multiple projects, preserve each project as a separate top-level chapter; do not explain relationships or rank priorities unless requested.
 
 Then recommend a design tendency based on the chosen report type and ask the user to confirm or adjust it. Treat a design tendency explicitly supplied in the user's request as already confirmed; do not ask again.
@@ -48,17 +69,29 @@ Read [references/conversation-evidence.md](references/conversation-evidence.md) 
 
 ### 2. Build the evidence ledger
 
-Read only the confirmed tasks. Follow explicit references from those tasks to local formulas, figures, experiment outputs, source files, or prior decks when required for fidelity.
+Read available canonical authorities first, then read only the confirmed task
+bodies. Follow authority indexes and explicit task references to local
+formulas, figures, experiment outputs, source files, reports, or prior decks
+when required for fidelity.
 
 For every candidate claim, record:
 
-- project and task identity;
+- project identity and, when applicable, task identity;
 - message date or stable locator;
+- source role: canonical strategy, current state, stable boundary, detailed
+  evidence, or conversation chronology;
 - status: `已验证`, `已实现但未验证`, `计划中`, `受阻`, `已否决`, or `待确认`;
 - supporting artifact or validation result;
 - whether it changes a workflow, objective function, formula, method, or experiment plan.
 
-Prefer newer verified evidence over older state, but never silently discard conflicts. Surface material conflicts and ask the user to resolve any conflict that changes the central narrative.
+Respect each canonical file only within its responsibility. Use
+`PROJECT_CORE.md` for the current durable strategy, `CURRENT_STAGE.md` for the
+current volatile state, and `AGENTS.md` for stable boundaries. Use selected
+tasks to reconstruct the reporting-period chronology and explain changes, not
+to silently override checked-in authorities. Prefer newer verified evidence
+within the same role, but never silently discard conflicts. Surface material
+conflicts and ask the user to resolve any conflict that changes the central
+narrative.
 
 Treat this ledger as a transient internal working record by default. Establish it before generation, use it to approve the facts and audit the deck, and do not save it in the final output directory unless explicitly requested.
 
@@ -70,6 +103,12 @@ Read [references/content-architecture.md](references/content-architecture.md). P
 2. missing, conflicting, or unverified items;
 3. a slide-by-slide outline;
 4. a proposed design tendency and estimated slide count.
+
+For a project with `PROJECT_CORE.md`, also summarize the durable research
+question, primary direction, innovation and component status, explored-route
+decisions, current claim ceiling, and open strategic questions before showing
+the reporting-period delta. Do not retroactively present the current strategy
+as if it already existed earlier in the selected date range.
 
 Estimate length from speaking time rather than filling a fixed page quota. Use roughly one slide per minute only as a starting point; allocate more time and fewer slides for formulas, mechanism diagrams, and before-after explanations.
 

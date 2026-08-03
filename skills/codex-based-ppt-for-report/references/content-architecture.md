@@ -22,6 +22,34 @@ Emphasize milestone goals, accumulated verified outcomes, remaining gaps, decisi
 
 Derive a structure from the user's stated purpose while preserving evidence states and change explanations.
 
+## Canonical project context when available
+
+When a selected project contains the optional three-file authority model, use
+it to establish the research narrative before interpreting the selected
+conversation period:
+
+- `PROJECT_CORE.md` `Research Objective` and `Core Direction` frame the chapter
+  opening and research question;
+- `Innovation Hypotheses` and `Component Map` ground method, mechanism,
+  architecture, and formula slides;
+- `Explored Directions` explains why routes were accepted, rejected, deferred,
+  or superseded when that history is useful to the audience;
+- `Evidence and Claim Position` and `Scientific Boundaries` constrain result
+  wording, uncertainty, limitations, and the current claim ceiling;
+- `Open Strategic Questions` and `Strategic Roadmap` inform longer-term plans,
+  while `CURRENT_STAGE.md` supplies the immediate milestone and next action;
+- `Canonical Sources` provides targeted artifact and report pointers.
+
+Use `AGENTS.md` internally for stable data, validation, and claim boundaries;
+do not turn operating rules into slide content unless the presentation is
+about governance or the boundary materially changes the scientific meaning.
+
+The three files are optional. When unavailable, derive the same audience
+questions from approved conversation evidence and task-referenced artifacts.
+Do not invent a missing strategy, component status, evidence level, or claim
+boundary. Do not expose authority filenames or schema fields on ordinary
+research slides.
+
 ## Audience-facing research narrative
 
 Maintain a detailed evidence ledger during preparation, but do not reproduce it mechanically on slides. For ordinary research updates, translate provenance and implementation state into a concise narrative:
