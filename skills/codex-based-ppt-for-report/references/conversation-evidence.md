@@ -91,3 +91,9 @@ Create one row per slide:
 Use project name, task title or ID, and message date as the Codex locator. Record exact local artifact paths when used. If a slide contains only navigation or section framing, label it accordingly rather than inventing evidence.
 
 Keep this map as an internal temporary record by default. Persist or deliver it only when the user explicitly requests an evidence map.
+
+For multi-project or long-history runs, follow
+[evidence-packets.md](evidence-packets.md). Let project extractors read the
+confirmed task bodies and write exact locators so the main agent can work from
+compact packets. Packet extraction does not replace direct verification of the
+current authorities or central claims.

@@ -119,8 +119,12 @@ If no material change exists, explicitly state `本期无流程或核心表示�
 - Reconstruct core equations clearly; do not use blurry screenshots.
 - Preserve notation from the source. Never invent missing terms or silently normalize inconsistent symbols.
 - Typeset formulas as mathematics. Do not expose source-code notation such as `eta_SB`, `lambda_L0_mean`, or raw underscore-based subscripts in visible equations when proper mathematical notation can be rendered.
-- Prefer native editable equation objects. When the production tool cannot create them reliably, generate high-resolution SVG from LaTeX or MathJax and preserve the LaTeX source in the editable production source or speaker notes.
+- Use native editable Office Math when reliable. Otherwise generate high-resolution SVG or EMF from LaTeX/MathJax and preserve the exact source in the temporary production files.
+- Give each vector equation picture alt text in the form `Equation: <source-id>` so package QA can distinguish it from unrelated vector artwork.
+- Do not construct non-trivial display equations from ordinary text runs or text boxes, even when they use Cambria Math. A math font does not provide equation layout semantics.
+- Keep Chinese prose outside the mathematical expression. Use a symbolic decomposition such as `J = J_{rec} + \alpha J_{sparse} + \beta J_{graph} + \gamma J_{cons}` and explain each term beside or below it.
 - Verify fractions, subscripts, superscripts, matrix transposes, norms, traces, Greek letters, and operator spacing in the final rendered slide.
+- Compare every rendered display equation against its authoritative source expression symbol by symbol. Treat a changed index, exponent, norm, coefficient, domain, or constraint as a factual error, not a cosmetic defect.
 - Compare before and after side by side or through a progressive reveal.
 - Highlight only the changed terms using restrained color and annotations.
 - Explain every changed term and symbol in Chinese.
@@ -136,13 +140,19 @@ Give every formula symbol a Chinese meaning. Avoid untranslated process labels s
 
 ## Speaker notes
 
-Add concise notes to every substantive slide when the approved presentation format supports speaker notes:
+Add an audience-ready Chinese talk track to every substantive slide when the approved presentation format supports speaker notes. Write complete, natural sentences that the presenter can speak directly. A typical substantive slide should include:
 
-- one-sentence takeaway;
-- recommended speaking order;
-- change rationale or evidence that must be emphasized;
-- likely advisor question or caveat;
-- suggested time allocation when useful.
+- a short transition from the previous slide when needed;
+- the slide's main takeaway in the opening sentence;
+- a logical walk through the formula, figure, table, or process in visual order;
+- the evidence boundary, caveat, or likely advisor question;
+- a bridge to the next slide and an optional time cue.
+
+Do not write production instructions such as `项目切换页`, `这里讲清楚`, or
+`重点强调` as the note itself. Turn that intent into the actual spoken wording.
+Do not append `[Sources]` blocks or source lists to speaker notes unless the
+user explicitly requests source-bearing notes. Keep provenance in the
+transient evidence packet and ledger.
 
 Do not hide essential evidence only in notes.
 

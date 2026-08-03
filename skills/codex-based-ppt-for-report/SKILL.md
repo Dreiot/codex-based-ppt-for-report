@@ -35,7 +35,7 @@ Ask one compact set of startup questions covering only decisions that cannot be 
    - 阶段成果总结与下一步安排
    - 自定义类型
 4. State the expected speaking duration.
-5. Confirm a report type and output directory when they cannot be safely inferred from context. Use editable `.pptx` by default; accept offline editable `.html` when explicitly requested. Unless the user specifies another convention, name the final file `<YYYY-MM-DD>_<汇报类型>.pptx` or `.html`.
+5. Confirm a report type and output directory when they cannot be safely inferred from context. Use editable `.pptx` by default; accept offline editable `.html` when explicitly requested. Unless the user specifies another convention, name the final file with the local production date only: `<YYYY-MM-DD>.pptx` or `.html`. If that path already exists and overwrite permission is absent, ask before replacing it.
 
 Identify each selected project's repository only from user-provided paths,
 established workspace mappings, task metadata, or approved task references.
@@ -74,6 +74,22 @@ bodies. Follow authority indexes and explicit task references to local
 formulas, figures, experiment outputs, source files, reports, or prior decks
 when required for fidelity.
 
+For two or more projects, long confirmed task bodies, or a context-sensitive
+run, read [references/evidence-packets.md](references/evidence-packets.md) and
+prefer parallel evidence extraction. Use one narrowly scoped extractor per
+project, at most three concurrently by default. Request `gpt-5.6-luna` with
+`medium` reasoning when model selection is available; otherwise use the
+fastest suitable subagent. Each extractor reads only its assigned authorities,
+confirmed tasks, and referenced artifacts, then writes to a disjoint temporary
+project directory. It records exact source locators and uncertainty but does
+not decide the final narrative, resolve material conflicts, or promote claims.
+If subagents are unavailable, build the same packet serially.
+
+Keep the main agent out of full conversation bodies when a valid packet is
+available. The main agent must still verify repository/ref identity, read or
+spot-check the current `PROJECT_CORE.md` and `CURRENT_STAGE.md`, and trace every
+central or conflicting claim back to its recorded source before approval.
+
 For every candidate claim, record:
 
 - project identity and, when applicable, task identity;
@@ -93,7 +109,11 @@ within the same role, but never silently discard conflicts. Surface material
 conflicts and ask the user to resolve any conflict that changes the central
 narrative.
 
-Treat this ledger as a transient internal working record by default. Establish it before generation, use it to approve the facts and audit the deck, and do not save it in the final output directory unless explicitly requested.
+Treat the evidence packets and ledger as transient internal working records by
+default. Establish them before generation, use them to approve the facts and
+audit the deck, and do not save them in the final output directory unless
+explicitly requested. Retain them in the temporary run directory until the user
+accepts the final presentation, then delete them.
 
 ### 3. Prepare content for approval
 
@@ -143,6 +163,22 @@ Allowed paths include:
 - `oil-ppt` alone for an explicitly requested offline HTML deliverable, or combined with an explicitly disclosed PPTX conversion or reconstruction tool and post-conversion QA for a PPTX deliverable;
 - a custom workflow whose tools, editable source, conversion path, and QA method are named explicitly.
 
+For a new research `.pptx`, prefer a callable custom `ppt-agent` as the
+production orchestrator; it should use the built-in Presentations tooling as
+its PowerPoint engine. Spawn that role only after outline approval and pass the
+approved packet paths, output path, note policy, formula-slide list, and QA
+contract. This keeps production context isolated while preserving editable
+PPTX output. If the role is unavailable, say so and use the built-in tooling
+directly after the user accepts that route. Direct production is also suitable
+for bounded edits to an existing deck and simple short decks.
+
+For any formula-heavy deck, test one representative equation before full
+production. The selected route must demonstrate native Office Math or clean
+LaTeX/MathJax SVG/EMF output. Ordinary text boxes using a math font do not
+satisfy this test. If the test fails, correct the equation pipeline; using a
+different orchestrator does not by itself change the rendering engine. Ask
+before changing to a materially different production route.
+
 Do not switch production paths silently. If the selected path is unavailable or fails, report the problem and ask the user to approve the proposed alternative.
 
 ### 5. Produce the presentation
@@ -158,11 +194,21 @@ After approval, give the selected production path the following source packet wi
 - the rules in [references/design-and-qa.md](references/design-and-qa.md);
 - the required output paths.
 
-Require a fully editable 16:9 presentation in the approved format, Chinese academic terminology, full-slide rendering, full-size visual inspection, and revision of visual defects before delivery. Require concise speaker notes on every substantive slide when the selected format supports notes. If it does not, disclose that limitation and obtain approval before production; do not silently omit the notes.
+Require a fully editable 16:9 presentation in the approved format, Chinese academic terminology, full-slide rendering, full-size visual inspection, and revision of visual defects before delivery. Require audience-ready Chinese talk tracks in the speaker notes of every substantive slide when the selected format supports notes. Notes must be written as natural presentation prose that can be spoken directly, not as production instructions, evidence ledgers, or one-line metadata summaries. The skill owner has explicitly selected source-free talk-track notes: keep provenance in the transient evidence packet and pass `do not add [Sources] blocks or source lists to speaker notes` as an explicit user requirement to the production engine. If an engine cannot honor that requirement, report the conflict instead of silently changing the notes policy. If the format cannot store notes, disclose that limitation and obtain approval before production; do not silently omit the talk track.
 
 For multiple projects, require a brief chapter divider or an equally explicit visual transition before each new project. Keep the divider simple: project name plus one neutral research-focus subtitle is usually enough.
 
-Render mathematical expressions as mathematics, not programmer-style text. Prefer editable equation objects when the production path supports them reliably. Otherwise use high-resolution LaTeX/MathJax vector output and retain the source expression in the production files or notes. Never present core equations with raw underscores, improvised Unicode spacing, or flattened superscripts when correct subscripts, fractions, norms, traces, transposes, and Greek symbols are available.
+Render mathematical expressions as mathematics, not programmer-style text.
+Use native Office Math when it can be created and rendered reliably; otherwise
+use LaTeX/MathJax SVG or EMF and retain the exact source expression in the
+temporary production files. Do not build non-trivial display equations from
+ordinary text boxes, even with Cambria Math. Keep Chinese explanations outside
+the equation and use symbolic terms inside it. Never present core equations
+with raw underscores, improvised Unicode spacing, flattened scripts, or text
+standing in for mathematical subscripts when proper fractions, norms, traces,
+transposes, Greek symbols, and operator spacing are available.
+Set each vector equation picture's alt text to `Equation: <source-id>` so the
+package audit can distinguish equations from logos and decorative SVG assets.
 
 Preserve every formula's natural aspect ratio. For SVG formulas, include `preserveAspectRatio="xMidYMid meet"`, parse the SVG `viewBox`, compute one uniform scale with `min(slotWidth / viewBoxWidth, slotHeight / viewBoxHeight)`, and center the resulting object in its allotted slot. Never stretch a formula by independently forcing both its width and height to the slot dimensions. After export, compare the formula's natural aspect ratio with its displayed object frame and require at most 1% relative error, then visually inspect every formula-heavy slide for stretching, clipping, blur, font substitution, and misplaced subscripts or superscripts.
 
@@ -174,12 +220,32 @@ The design must vary with content. Keep the approved white, dark-gray, restraine
 
 Independently verify the production outputs against the approved outline and evidence ledger. Require all checks in [references/design-and-qa.md](references/design-and-qa.md).
 
-Perform the full audit even though supporting records are not default deliverables. Keep the evidence ledger, renderings, inspection output, and QA results in an operating-system temporary directory or another clearly separated staging area. Remove those temporary artifacts after successful verification and before handoff when safe to do so.
+Run the deterministic package audit before delivery:
+
+```text
+<python> <skill-dir>/scripts/audit_pptx.py <final.pptx> \
+  --formula-slides <comma-separated slide numbers or none> \
+  --inline-math-slides <intentional simple inline-math slides or none> \
+  --brief-note-slides <title/divider slides allowed brief notes or none>
+```
+
+Treat missing notes, `[Sources]` blocks, production-instruction notes, or
+unapproved brief notes, undeclared formula text, or text-only approximations of
+non-trivial display equations as failures. Do not use inline-math exceptions on
+declared display-formula slides. Use allow flags only for deliberate exceptions
+that remain consistent with the approved outline.
+
+Perform the full audit even though supporting records are not default deliverables. Keep the evidence packets, ledger, renderings, inspection output, and QA results in an operating-system temporary directory or another clearly separated staging area. Keep them available for corrections during user acceptance, then remove them after the user accepts the presentation. Do not delete the only trace needed to correct a rejected draft.
+
+Mark each temporary run with its creation time. At the start of a later run,
+remove abandoned run directories older than 14 days only when they are inside
+this skill's dedicated temporary root, `retain_requested` is false, and they
+contain no user-requested deliverable.
 
 Deliver exactly one default artifact:
 
-- `<YYYY-MM-DD>_<汇报类型>.pptx`
+- `<YYYY-MM-DD>.pptx`
 
-When the user explicitly selects offline HTML, deliver only `<YYYY-MM-DD>_<汇报类型>.html` and adapt format-specific QA accordingly. Persist an evidence map, QA report, rendered slides, editable source project, or inspection data only when the user explicitly requests that artifact.
+When the user explicitly selects offline HTML, deliver only `<YYYY-MM-DD>.html` and adapt format-specific QA accordingly. Persist an evidence map, QA report, rendered slides, editable source project, or inspection data only when the user explicitly requests that artifact.
 
 Report any check that did not run and the substitute evidence used. Never describe a skipped check as passed.

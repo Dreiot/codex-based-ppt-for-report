@@ -46,18 +46,19 @@ Render every slide and inspect at full size. Check:
 4. research-facing wording preserves the evidence boundary between established observations, preliminary results, planned work, unperformed experiments, and unresolved uncertainty without requiring developer-facing status codes on slides;
 5. every material workflow or formula change has before, after, rationale, core difference, and impact;
 6. Chinese terminology and first-use bilingual expansion follow the content rules;
-7. formulas use proper mathematical typesetting, remain legible and notation-consistent, and correctly render subscripts, superscripts, fractions, norms, traces, transposes, and Greek symbols without raw programmer-style underscores;
+7. formulas use native Office Math or clean LaTeX/MathJax vector output for non-trivial display equations; every vector equation has `Equation: <source-id>` alt text; formulas remain legible and notation-consistent and correctly render subscripts, superscripts, fractions, norms, traces, transposes, and Greek symbols without raw programmer-style underscores or ordinary text-box approximations;
 8. every formula preserves its natural aspect ratio: SVG formulas use `preserveAspectRatio="xMidYMid meet"`, are fitted with one uniform scale derived from the `viewBox`, and have no more than 1% relative difference between the natural and displayed aspect ratios;
 9. formula-heavy slides have been visually checked at full size for stretching, clipping, blur, font substitution, and misplaced subscripts or superscripts;
-10. speaker notes exist on every substantive slide when the approved format supports them; otherwise the pre-approved limitation and agreed substitute are recorded;
-11. no text, shape, image, or chart overflows the canvas;
-12. no empty placeholders, clipped text, accidental overlaps, or unreadable labels remain;
-13. no third-party template branding remains;
-14. layouts show appropriate variation without losing visual consistency;
-15. slide titles are concise topic labels or natural scientific titles, and presenter-oriented framing has been moved to body text or speaker notes;
-16. every project in a multi-project deck begins with a clear chapter transition or divider;
-17. the final presentation is saved to the agreed output location and existing decks remain untouched unless overwrite permission was explicit;
-18. the default final output location contains only the requested presentation artifact; evidence maps, QA reports, renderings, source projects, and inspection data are absent unless explicitly requested.
+10. speaker notes exist on every substantive slide when the approved format supports them and form a natural Chinese talk track with takeaway, explanation, caveat, and transition rather than production instructions or metadata; otherwise the pre-approved limitation and agreed substitute are recorded;
+11. speaker notes contain no `[Sources]` blocks or source lists unless the user explicitly requested source-bearing notes; provenance remains traceable in the temporary evidence packet;
+12. no text, shape, image, or chart overflows the canvas;
+13. no empty placeholders, clipped text, accidental overlaps, or unreadable labels remain;
+14. no third-party template branding remains;
+15. layouts show appropriate variation without losing visual consistency;
+16. slide titles are concise topic labels or natural scientific titles, and presenter-oriented framing has been moved to body text or speaker notes;
+17. every project in a multi-project deck begins with a clear chapter transition or divider;
+18. the final presentation uses the local production date as `<YYYY-MM-DD>.pptx` or `.html` unless the user requested another name, and existing decks remain untouched unless overwrite permission was explicit;
+19. the default final output location contains only the requested presentation artifact; evidence packets, QA reports, renderings, source projects, and inspection data remain in the temporary run directory until user acceptance and are then removed unless explicitly requested.
 
 ## Internal QA record
 
