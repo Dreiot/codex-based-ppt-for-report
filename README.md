@@ -47,6 +47,20 @@ Copy-Item -Recurse -Force `
   "$env:USERPROFILE\.codex\skills\codex-based-ppt-for-report"
 ```
 
+推荐同时安装仓库提供的两个 Agent。若目标路径已有自行定制的同名配置，
+先备份或合并差异，再使用 `-Force`：
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\agents" | Out-Null
+Copy-Item -Force '.\agents\ppt-agent.toml' "$env:USERPROFILE\.codex\agents\ppt-agent.toml"
+Copy-Item -Force '.\agents\ppt-evidence-extractor.toml' "$env:USERPROFILE\.codex\agents\ppt-evidence-extractor.toml"
+```
+
+- `ppt-agent`：使用较强推理，负责已批准内容的视觉制作、公式路径、渲染与验收。
+- `ppt-evidence-extractor`：默认使用 `gpt-5.6-luna / medium`，按项目生成精简证据包。该配置要求当前账户能够使用 Luna；若不可用，不安装此配置，Skill 会改用其他合适的快速子代理或串行提取。
+
+Agent 不固定 sandbox，会继承父任务的权限；用户选择的临时目录和最终输出目录必须位于父任务可写范围。安装或更新 Agent 后重启 Codex。没有安装这些 Agent 时，Skill 仍可串行提取证据；若需要从 PPT Agent 切换为直接使用内置 Presentations，必须先说明路径变化并获得用户同意。
+
 重新打开相关 Codex 任务后，显式调用：
 
 ```text
@@ -117,6 +131,10 @@ $codex-based-ppt-for-report
 ## 项目结构
 
 ```text
+agents/
+├── ppt-agent.toml
+└── ppt-evidence-extractor.toml
+
 skills/codex-based-ppt-for-report/
 ├── SKILL.md
 ├── agents/
