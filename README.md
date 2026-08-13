@@ -78,7 +78,7 @@ $codex-based-ppt-for-report
 ## 推荐搭配：Codex Research Workflow
 
 本 Skill 可以独立使用，不要求仓库采用特定治理框架。对于长期科研项目，推荐搭配
-[Dreiot/codex-research-handoff](https://github.com/Dreiot/codex-research-handoff)：
+[Dreiot/codex-research-workflow](https://github.com/Dreiot/codex-research-workflow)：
 
 - `AGENTS.md` 保存稳定的操作、数据、验证与 claim 边界；
 - `docs/PROJECT_CORE.md` 保存研究问题、主方向、创新、组件、探索历史和证据位置；
