@@ -27,6 +27,8 @@ Recommend one tendency after the report type is chosen, but require confirmation
 ## Visual rules
 
 - Keep titles concise, natural, and topic-led by default. Do not use prompt-like, slogan-like, or presentation-strategy sentences as titles; move those statements into the body or speaker notes.
+- Use `宋体` (`SimSun`) as the East Asian typeface for all visible Chinese text and `Times New Roman` as the Latin typeface for ordinary English letters and Arabic numerals. Apply both settings explicitly to mixed-script text; do not rely on automatic font fallback. Mathematical formula objects retain their proper math typeface.
+- Center all table content horizontally and vertically, including header cells, row-label cells, method names, and numeric cells, unless a user-approved table-specific exception requires another alignment.
 - Make the main takeaway visible without reading speaker notes.
 - Use Chinese labels in diagrams and charts unless an official name must remain unchanged.
 - Do not fabricate decorative data, plots, citations, or icons that imply evidence.
@@ -59,6 +61,8 @@ Render every slide and inspect at full size. Check:
 17. every project in a multi-project deck begins with a clear chapter transition or divider;
 18. the final presentation uses the local production date as `<YYYY-MM-DD>.pptx` or `.html` unless the user requested another name, and existing decks remain untouched unless overwrite permission was explicit;
 19. the default final output location contains only the requested presentation artifact; evidence packets, QA reports, renderings, source projects, and inspection data remain in the temporary run directory until user acceptance and are then removed unless explicitly requested.
+20. every visible Chinese text run uses the `宋体`/`SimSun` East Asian typeface, while ordinary Latin letters and Arabic numerals use `Times New Roman`; inspect mixed-script runs in the exported package rather than inferring compliance from the theme alone;
+21. every table header, row label, method name, and numeric cell is horizontally and vertically centered in the exported PPTX and remains visually centered in the full-size render.
 
 ## Internal QA record
 

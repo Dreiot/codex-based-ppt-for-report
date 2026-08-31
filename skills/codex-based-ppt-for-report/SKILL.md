@@ -196,6 +196,26 @@ After approval, give the selected production path the following source packet wi
 
 Require a fully editable 16:9 presentation in the approved format, Chinese academic terminology, full-slide rendering, full-size visual inspection, and revision of visual defects before delivery. Require audience-ready Chinese talk tracks in the speaker notes of every substantive slide when the selected format supports notes. Notes must be written as natural presentation prose that can be spoken directly, not as production instructions, evidence ledgers, or one-line metadata summaries. The skill owner has explicitly selected source-free talk-track notes: keep provenance in the transient evidence packet and pass `do not add [Sources] blocks or source lists to speaker notes` as an explicit user requirement to the production engine. If an engine cannot honor that requirement, report the conflict instead of silently changing the notes policy. If the format cannot store notes, disclose that limitation and obtain approval before production; do not silently omit the talk track.
 
+Apply the following typography defaults to every generated or revised research
+deck unless the user explicitly requests a different font system:
+
+- set the East Asian typeface of all visible Chinese presentation text to
+  `宋体` (`SimSun`);
+- set the Latin typeface of ordinary English letters and Arabic numerals to
+  `Times New Roman`, including mixed Chinese-English text, chart labels, slide
+  numbers, and table text;
+- preserve a proper mathematical typeface inside native Office Math or
+  LaTeX/MathJax formula objects instead of forcing Times New Roman onto a
+  non-trivial equation and damaging mathematical layout;
+- center every table cell horizontally and vertically, including headers,
+  row labels, method names, and numeric cells, unless the user explicitly
+  approves a different alignment for a specific table.
+
+Implement mixed-script text with separate East Asian and Latin font settings
+or run-level formatting rather than relying on application font fallback.
+Verify the exported PPTX package and full-size render; setting only an editor
+theme or a default font without checking the actual runs is insufficient.
+
 For multiple projects, require a brief chapter divider or an equally explicit visual transition before each new project. Keep the divider simple: project name plus one neutral research-focus subtitle is usually enough.
 
 Render mathematical expressions as mathematics, not programmer-style text.
