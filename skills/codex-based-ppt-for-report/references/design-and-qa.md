@@ -1,8 +1,23 @@
 # Design system and quality assurance
 
-## Adaptive design baseline
+## Adaptive visual routing
 
-Use a 16:9 canvas with a clean white background, dark-gray primary text, and restrained deep-blue accents. Maintain strong hierarchy, generous margins, and academic restraint. Build an original clean master; do not retain `Made with GAMMA` or other third-party template branding.
+Use a 16:9 canvas and resolve the visual route from the active Presentations
+skill before composing slides. A research-content tendency is not automatically
+a custom visual direction.
+
+- On the Codex-native route, use the current template picker and bundled
+  default layout system when available; do not impose this skill's historical
+  white/deep-blue custom styling.
+- On a reference-deck or template route, preserve the reference master,
+  layouts, typography, media frames, and visual language.
+- On an explicitly selected custom academic route, use a clean white
+  background, dark-gray primary text, restrained deep-blue accents, strong
+  hierarchy, generous margins, and academic restraint.
+
+The active Presentations skill is the source of truth when its native visual
+system evolves. Never retain `Made with GAMMA` or other third-party template
+branding.
 
 Treat this as a design language, not a fixed template. Vary layout according to content:
 
@@ -63,6 +78,7 @@ Render every slide and inspect at full size. Check:
 19. the default final output location contains only the requested presentation artifact; evidence packets, QA reports, renderings, source projects, and inspection data remain in the temporary run directory until user acceptance and are then removed unless explicitly requested.
 20. every visible Chinese text run uses the `宋体`/`SimSun` East Asian typeface, while ordinary Latin letters and Arabic numerals use `Times New Roman`; inspect mixed-script runs in the exported package rather than inferring compliance from the theme alone;
 21. every table header, row label, method name, and numeric cell is horizontally and vertically centered in the exported PPTX and remains visually centered in the full-size render.
+22. the transient QA record identifies the active Presentations skill or bundle and the resolved visual route; a Codex-native run uses the current native template/layout behavior rather than a legacy hand-built visual system.
 
 ## Internal QA record
 

@@ -65,6 +65,24 @@ Then recommend a design tendency based on the chosen report type and ask the use
 - 决策讨论型
 - 自定义
 
+Resolve the visual-production route separately from the content tendency. A
+content tendency such as `严谨学术型` controls emphasis and density but does not
+by itself authorize a custom visual system. Follow the active Presentations
+skill's current routing rules, using the first applicable route:
+
+1. a user-designated reference PPTX or template: inherit its master, layouts,
+   typography, and visual language;
+2. an explicit custom palette, brand, composition, or formatting request: use
+   a from-scratch custom visual route;
+3. no explicit visual direction: use the current Codex-native presentation
+   route, including its template picker and bundled default layout system when
+   available.
+
+Treat the earlier white, dark-gray, restrained-deep-blue academic treatment as
+an available custom option, not as an implicit default that disables the
+Codex-native route. State the resolved visual route together with the
+production path before authoring.
+
 Read [references/conversation-evidence.md](references/conversation-evidence.md) before collecting or reconciling evidence.
 
 ### 2. Build the evidence ledger
@@ -172,6 +190,14 @@ PPTX output. If the role is unavailable, say so and use the built-in tooling
 directly after the user accepts that route. Direct production is also suitable
 for bounded edits to an existing deck and simple short decks.
 
+The active installed Presentations skill is the source of truth for PowerPoint
+authoring, visual routing, template selection, runtime setup, and verification.
+The `ppt-agent` profile must read that current skill at the start of each PPTX
+run and must not preserve an older template or layout convention merely because
+it appears in the agent profile or a previous builder. Record the active
+Presentations bundle identifier or resolved skill path and the selected visual
+route in the transient QA record.
+
 For any formula-heavy deck, test one representative equation before full
 production. The selected route must demonstrate native Office Math or clean
 LaTeX/MathJax SVG/EMF output. Ordinary text boxes using a math font do not
@@ -234,7 +260,16 @@ Preserve every formula's natural aspect ratio. For SVG formulas, include `preser
 
 Keep internal provenance, review, and validation details in the transient evidence ledger or internal QA record unless they are explicitly part of the approved slide outline. Persist those records only when requested. Do not let implementation bookkeeping displace the research question, experiment design, observations, or next-stage plan.
 
-The design must vary with content. Keep the approved white, dark-gray, restrained-deep-blue baseline, but do not repeat one table/card layout across the deck. Prefer diagrams, plots, experimental figures, and formula explanations when they communicate the evidence better. Do not retain third-party template branding such as `Made with GAMMA`.
+The design must vary with content and follow the resolved visual route. On the
+Codex-native route, do not inject the older white/deep-blue custom system or a
+legacy hand-built layout library; follow the active Presentations skill's
+current template and layout behavior. On a reference route, preserve the
+reference hierarchy and visual language. On the custom academic route, the
+white, dark-gray, restrained-deep-blue treatment remains available, but do not
+repeat one table/card layout across the deck. Prefer diagrams, plots,
+experimental figures, and formula explanations when they communicate the
+evidence better. Do not retain third-party template branding such as
+`Made with GAMMA`.
 
 ### 6. Audit and deliver
 
